@@ -7,7 +7,6 @@
 
 import 'package:args/command_runner.dart';
 import 'package:flutter_scripts/src/command_runner.dart';
-import 'package:flutter_scripts/src/version.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:pub_updater/pub_updater.dart';
 
@@ -44,6 +43,7 @@ class UpdateCommand extends Command<int> {
     }
     updateCheckProgress.complete('Checked for updates');
 
+    final packageVersion = await getPackageCurrentVersion();
     final isUpToDate = packageVersion == latestVersion;
     if (isUpToDate) {
       _logger.info('CLI is already at the latest version.');
